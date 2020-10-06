@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<!-- Bootstrapの設定 -->
+<link th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}" rel="stylesheet" />
+<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+<title>SignUp</title>
+
+</head>
+<body>
+<div class="col-sm-5">
+<div class="page-header">
+<h1>ユーザー新規登録</h1>
+</div>
+<form method="post" action="/signup" th:object="${signupForm}">
+<table class="table table-bordered table-hover">
+<!-- ユーザーid -->
+<tr>
+<th class="active">ユーザID</th>
+<td>
+<div class="form-group">
+<!-- th:fieldの追加 -->
+<input type="text" class="form-control" th:field="*{loginid}" />
+</div>
+</td>
+</tr>
+<!-- ユーザーpassword -->
+<tr>
+<th class="active">パスワード</th>
+<td>
+<div class="form-group">
+<!-- th:fieldの追加 -->
+<input type="password" class="form-control" th:field="*{loginpass}" />
+</div>
+</td>
+</tr>
+<!-- ユーザー名 -->
+<tr>
+<th class="active">ユーザ名</th>
+<td>
+<div class="form-group">
+<!-- th:fieldの追加 -->
+<input type="text" class="form-control" th:field="*{uname}" />
+</div>
+</td>
+</tr>
+<!-- 性別 -->
+<tr>
+<th class="active">性別</th>
+<td>
+<div class="form-group">
+<div th:each="item : ${radioSex}">
+<input type="radio" name="radioSex" th:text="${item.key}" th:value="${item.value}" th:field="*{usex}"></input>
+</div>
+</div>
+</td>
+</tr>
+<!-- 誕生日の入力エリア -->
+<tr>
+<th class="active">誕生日</th>
+<td>
+<div class="form-group">
+<!-- th:fieldの追加 -->
+<input type="text" class="form-control" placeholder="yyyy/MM/dd" th:field="*{ubirth}" />
+</div>
+</td>
+</tr>
+<!-- email -->
+<tr>
+<th class="active">メールアドレス</th>
+<td>
+<div class="form-group">
+<input type="text" class="form-control" th:field="*{uemail}" />
+</div>
+</td>
+</tr>
+<!-- 郵便番号 -->
+<tr>
+<th class="active">郵便番号</th>
+<td>
+<div class="form-group">
+<input type="text" class="form-control" th:field="*{upost}" />
+</div>
+</td>
+</tr>
+<!-- 住所 -->
+<tr>
+<th class="active">住所</th>
+<td>
+<div class="form-group">
+<input type="text" class="form-control" th:field="*{uaddress}" />
+</div>
+</td>
+</tr>
+<!-- CreditCard -->
+<tr>
+<th class="active">クレジットカード番号</th>
+<td>
+<div class="form-group">
+<input type="text" class="form-control" th:field="*{ucredit}" />
+</div>
+</td>
+</tr>
+</table>
+<!-- ポイント２：エラーメッセージの一覧表示 -->
+<ul>
+<li th:each="error : ${#fields.detailedErrors()}">
+<span th:text="${error.message}">Error message</span>
+</li>
+</ul>
+<!-- ユーザー登録ボタン -->
+<button class="btn btn-primary" type="submit">ユーザー登録</button>
+</form>
+</div>
+</body>
+</html>
